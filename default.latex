@@ -272,7 +272,6 @@ $else$
 \makesavenoteenv{longtable}
 $endif$
 $endif$
-$if(graphics)$
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -286,7 +285,8 @@ $if(graphics)$
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-$endif$
+\usepackage[export]{adjustbox}
+\usepackage[printonlyused]{acronym}
 $if(svg)$
 \usepackage{svg}
 $endif$
@@ -397,7 +397,7 @@ $if(natbib)$
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+\usepackage[style=$if(biblio-style)$$biblio-style$$else$authoryear$endif$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
@@ -485,7 +485,38 @@ $if(title)$
 $if(beamer)$
 \frame{\titlepage}
 $else$
-\maketitle
+\begin{titlepage}
+  \null
+  \vfill
+  $for(logo)$
+  \includegraphics[height=10mm, center]{$logo$} \\[5mm]
+  $endfor$
+  \begin{center}
+    \LARGE{$title$}\\
+    \vspace{1cm}
+    \normalsize
+    \large{$author$} \\
+    \smallskip
+    \large{$arbeit-matrikelnummer$} \\
+    \vspace{1cm}
+    \large{\textbf{$arbeit-art$}} \\
+    \smallskip
+    \large{im Fachgebiet $arbeit-fachgebiet$} \\
+    \smallskip
+    \large{$if(date)$$date$$else$\today$endif$} \\
+    \vspace{1cm}
+    $if(arbeit-gutachter)$
+    \large{\textbf{Prüfer*innen:}} \\
+    $for(arbeit-gutachter)$
+    \smallskip
+    \large{$arbeit-gutachter$} \\
+    $endfor$
+    \vspace{1cm}
+    $endif$
+  \end{center}
+  \vfill
+  \setcounter{page}{1}
+\end{titlepage}
 $endif$
 $if(abstract)$
 \begin{abstract}
@@ -535,6 +566,18 @@ $body$
 
 $if(has-frontmatter)$
 \backmatter
+$endif$
+$if(latexacronyms)$
+$if(has-chapters)$
+\chapter*{Abkürzungsverzeichnis}
+$else$
+\section*{Abkürzungsverzeichnis}
+$endif$
+\begin{acronym}
+$for(latexacronyms)$
+\acro{$it.short$}{$it.long$}
+$endfor$
+\end{acronym}
 $endif$
 $if(natbib)$
 $if(bibliography)$
