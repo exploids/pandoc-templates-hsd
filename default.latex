@@ -286,7 +286,7 @@ $endif$
 \def\fps@figure{htbp}
 \makeatother
 \usepackage[export]{adjustbox}
-\usepackage[printonlyused]{acronym}
+\usepackage[$for(acronymoptions)$$acronymoptions$$sep$,$endfor$]{acronym}
 $if(svg)$
 \usepackage{svg}
 $endif$
@@ -571,7 +571,7 @@ $if(acronyms)$
 $if(acronyms-title)$
 $if(has-chapters)$\chapter$else$\section$endif$*{$acronyms-title$}
 $endif$
-\begin{acronym}
+\begin{acronym}$if(acronyms-longest)$[$acronyms-longest$]$endif$
 $for(acronyms)$
 \acro{$it.name$}[$it.short$]{$it.long$}
 $if(it.short-plural)$\acroplural{$it.name$}[$it.short-plural$]{$if(it.long-plural)$$it.long-plural$$else$$it.long$$endif$}$endif$
