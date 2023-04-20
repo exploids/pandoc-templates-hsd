@@ -287,6 +287,7 @@ $endif$
 \makeatother
 \usepackage[export]{adjustbox}
 \usepackage[$for(acronymoptions)$$acronymoptions$$sep$,$endfor$]{acronym}
+\usepackage{tikz}
 $if(svg)$
 \usepackage{svg}
 $endif$
