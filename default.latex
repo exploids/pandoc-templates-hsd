@@ -398,7 +398,7 @@ $if(natbib)$
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage[style=$if(biblio-style)$$biblio-style$$else$authoryear$endif$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
@@ -550,6 +550,17 @@ $endif$
 \tableofcontents
 }
 $endif$
+$if(acronyms)$
+$if(acronyms-title)$
+$if(has-chapters)$\chapter$else$\section$endif$*{$acronyms-title$}
+$endif$
+\begin{acronym}$if(acronyms-longest)$[$acronyms-longest$]$endif$
+$for(acronyms)$
+\acro{$it.name$}[$it.short$]{$it.long$}
+$if(it.short-plural)$\acroplural{$it.name$}[$it.short-plural$]{$if(it.long-plural)$$it.long-plural$$else$$it.long$$endif$}$endif$
+$endfor$
+\end{acronym}
+$endif$
 $endif$
 $if(lof)$
 \listoffigures
@@ -567,17 +578,6 @@ $body$
 
 $if(has-frontmatter)$
 \backmatter
-$endif$
-$if(acronyms)$
-$if(acronyms-title)$
-$if(has-chapters)$\chapter$else$\section$endif$*{$acronyms-title$}
-$endif$
-\begin{acronym}$if(acronyms-longest)$[$acronyms-longest$]$endif$
-$for(acronyms)$
-\acro{$it.name$}[$it.short$]{$it.long$}
-$if(it.short-plural)$\acroplural{$it.name$}[$it.short-plural$]{$if(it.long-plural)$$it.long-plural$$else$$it.long$$endif$}$endif$
-$endfor$
-\end{acronym}
 $endif$
 $if(natbib)$
 $if(bibliography)$
