@@ -489,28 +489,28 @@ $else$
 \begin{titlepage}
   \null
   \vfill
-  $for(logo)$
-  \includegraphics[height=10mm, center]{$logo$} \\[5mm]
-  $endfor$
   \begin{center}
+    $for(logo)$
+    \includegraphics[$for(logo-options)$$logo-options$$sep$,$endfor$]{$logo$}$if(logo-spacing)$ \\[$logo-spacing$]$endif$
+    $endfor$
     \LARGE{$title$}\\
     \vspace{1cm}
     \normalsize
     \large{$author$} \\
     \smallskip
-    \large{$arbeit-matrikelnummer$} \\
+    \large{$author-info$} \\
     \vspace{1cm}
-    \large{\textbf{$arbeit-art$}} \\
+    \large{\textbf{$thesis-type$}} \\
     \smallskip
-    \large{im Fachgebiet $arbeit-fachgebiet$} \\
+    \large{$thesis-area-title$ $thesis-area$} \\
     \smallskip
     \large{$if(date)$$date$$else$\today$endif$} \\
     \vspace{1cm}
-    $if(arbeit-gutachter)$
-    \large{\textbf{Prüfer*innen:}} \\
-    $for(arbeit-gutachter)$
+    $if(thesis-supervisor)$
+    \large{\textbf{$thesis-supervisor-title$}} \\
+    $for(thesis-supervisor)$
     \smallskip
-    \large{$arbeit-gutachter$} \\
+    \large{$thesis-supervisor$} \\
     $endfor$
     \vspace{1cm}
     $endif$
