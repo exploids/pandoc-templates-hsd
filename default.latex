@@ -532,6 +532,9 @@ $endif$
 $if(has-frontmatter)$
 \frontmatter
 $endif$
+$if(titlepage)$
+$titlepage$
+$else$
 $if(title)$
 $if(beamer)$
 \frame{\titlepage}
@@ -567,6 +570,7 @@ $else$
   \end{center}
   \vfill
 \end{titlepage}
+$endif$
 $endif$
 $endif$
 $if(linestretch)$
